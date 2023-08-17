@@ -55,7 +55,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of TBSpayRates is to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.</p>
+<p>The goal of TBSpayRates is to extract rates of pay for public servants from the <a href="https://www.tbs-sct.canada.ca/pubs_pol/hrpubs/coll_agre/rates-taux-eng.asp" class="external-link">Treasury Board of Canada</a> Secretariat and tools for project planning/salary forecasting.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -77,24 +77,24 @@
 <span><span class="co">#&gt; Caused by warning in `gsub()`:</span></span>
 <span><span class="co">#&gt; ! argument 'pattern' has length &gt; 1 and only the first element will be used</span></span>
 <span></span>
-<span><span class="va">SP_salaries</span></span>
-<span><span class="co">#&gt; # A tibble: 357 × 19</span></span>
-<span><span class="co">#&gt;    Group Classification Effective.Date    date   Step.1 Step.2 Step.3 Step.4</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;             &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 SP    1              $) October 1, 20… NA      68896  71795  74697  77593</span></span>
-<span><span class="co">#&gt;  2 SP    1              X) Wage Adjustme… NA      69447  72369  75295  78214</span></span>
-<span><span class="co">#&gt;  3 SP    1              A) October 1, 20… NA      70836  73816  76801  79778</span></span>
-<span><span class="co">#&gt;  4 SP    1              Y) Wage Adjustme… NA      70978  73964  76955  79938</span></span>
-<span><span class="co">#&gt;  5 SP    1              B) October 1, 20… NA      72398  75443  78494  81537</span></span>
-<span><span class="co">#&gt;  6 SP    1              C) October 1, 20… NA      73484  76575  79671  82760</span></span>
-<span><span class="co">#&gt;  7 SP    1              D) October 1, 20… NA      74586  77724  80866  84001</span></span>
-<span><span class="co">#&gt;  8 SP    2              $) October 1, 20… NA         NA     NA     NA     NA</span></span>
-<span><span class="co">#&gt;  9 SP    2              X) Wage Adjustme… NA         NA     NA     NA     NA</span></span>
-<span><span class="co">#&gt; 10 SP    2              A) October 1, 20… NA         NA     NA     NA     NA</span></span>
-<span><span class="co">#&gt; # ℹ 347 more rows</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">SP_salaries</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 19</span></span>
+<span><span class="co">#&gt;   Group Classification Effective.Date     date   Step.1 Step.2 Step.3 Step.4</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;              &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 SP    1              $) October 1, 2017 NA      68896  71795  74697  77593</span></span>
+<span><span class="co">#&gt; 2 SP    1              X) Wage Adjustmen… NA      69447  72369  75295  78214</span></span>
+<span><span class="co">#&gt; 3 SP    1              A) October 1, 2018 NA      70836  73816  76801  79778</span></span>
+<span><span class="co">#&gt; 4 SP    1              Y) Wage Adjustmen… NA      70978  73964  76955  79938</span></span>
+<span><span class="co">#&gt; 5 SP    1              B) October 1, 2019 NA      72398  75443  78494  81537</span></span>
+<span><span class="co">#&gt; 6 SP    1              C) October 1, 2020 NA      73484  76575  79671  82760</span></span>
 <span><span class="co">#&gt; # ℹ 11 more variables: Step.5 &lt;dbl&gt;, Step.6 &lt;dbl&gt;, Step.7 &lt;dbl&gt;, Step.8 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   Step.9 &lt;dbl&gt;, Step.10 &lt;dbl&gt;, Step.11 &lt;dbl&gt;, Step.12 &lt;dbl&gt;, Step.13 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   Step.14 &lt;dbl&gt;, Range.Step.1 &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Please visit this package’s <a href="https://github.com/dfo-mar-odis/TBSpayRates" class="external-link">Github repo</a> to contribute or submit issues.</p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
