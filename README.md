@@ -4,6 +4,8 @@
 # TBSpayRates
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/dfo-mar-odis/TBSpayRates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dfo-mar-odis/TBSpayRates/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of TBSpayRates is to extract rates of pay for public servants
