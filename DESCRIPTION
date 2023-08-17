@@ -16,3 +16,4 @@ Imports:
     rlang,
     rvest,
     tidyr
+URL: https://dfo-mar-odis.github.io/TBSpayRates/
