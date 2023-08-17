@@ -50,8 +50,53 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-A package to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="tbspayrates">TBSpayRates<a class="anchor" aria-label="anchor" href="#tbspayrates"></a>
+</h1></div>
+<!-- badges: start -->
+<!-- badges: end -->
+<p>The goal of TBSpayRates is to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of TBSpayRates from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"dfo-mar-odis/TBSpayRates"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>This is a basic example which shows you how to solve a common problem:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dfo-mar-odis.github.io/TBSpayRates/">TBSpayRates</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">SP_salaries</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_salaries.html">get_salaries</a></span><span class="op">(</span><span class="st">"SP"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: There was 1 warning in `dplyr::mutate()`.</span></span>
+<span><span class="co">#&gt; ℹ In argument: `date = `%&gt;%`(...)`.</span></span>
+<span><span class="co">#&gt; Caused by warning in `gsub()`:</span></span>
+<span><span class="co">#&gt; ! argument 'pattern' has length &gt; 1 and only the first element will be used</span></span>
+<span></span>
+<span><span class="va">SP_salaries</span></span>
+<span><span class="co">#&gt; # A tibble: 357 × 19</span></span>
+<span><span class="co">#&gt;    Group Classification Effective.Date    date   Step.1 Step.2 Step.3 Step.4</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;             &lt;date&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 SP    1              $) October 1, 20… NA      68896  71795  74697  77593</span></span>
+<span><span class="co">#&gt;  2 SP    1              X) Wage Adjustme… NA      69447  72369  75295  78214</span></span>
+<span><span class="co">#&gt;  3 SP    1              A) October 1, 20… NA      70836  73816  76801  79778</span></span>
+<span><span class="co">#&gt;  4 SP    1              Y) Wage Adjustme… NA      70978  73964  76955  79938</span></span>
+<span><span class="co">#&gt;  5 SP    1              B) October 1, 20… NA      72398  75443  78494  81537</span></span>
+<span><span class="co">#&gt;  6 SP    1              C) October 1, 20… NA      73484  76575  79671  82760</span></span>
+<span><span class="co">#&gt;  7 SP    1              D) October 1, 20… NA      74586  77724  80866  84001</span></span>
+<span><span class="co">#&gt;  8 SP    2              $) October 1, 20… NA         NA     NA     NA     NA</span></span>
+<span><span class="co">#&gt;  9 SP    2              X) Wage Adjustme… NA         NA     NA     NA     NA</span></span>
+<span><span class="co">#&gt; 10 SP    2              A) October 1, 20… NA         NA     NA     NA     NA</span></span>
+<span><span class="co">#&gt; # ℹ 347 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 11 more variables: Step.5 &lt;dbl&gt;, Step.6 &lt;dbl&gt;, Step.7 &lt;dbl&gt;, Step.8 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   Step.9 &lt;dbl&gt;, Step.10 &lt;dbl&gt;, Step.11 &lt;dbl&gt;, Step.12 &lt;dbl&gt;, Step.13 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   Step.14 &lt;dbl&gt;, Range.Step.1 &lt;chr&gt;</span></span></code></pre></div>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
