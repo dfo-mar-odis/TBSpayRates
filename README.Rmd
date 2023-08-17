@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/dfo-mar-odis/TBSpayRates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dfo-mar-odis/TBSpayRates/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of TBSpayRates is to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.
+The goal of TBSpayRates is to extract rates of pay for public servants from the [Treasury Board of Canada](https://www.tbs-sct.canada.ca/pubs_pol/hrpubs/coll_agre/rates-taux-eng.asp) Secretariat and tools for project planning/salary forecasting.
 
 ## Installation
 
@@ -39,9 +39,12 @@ library(TBSpayRates)
 
 SP_salaries <- get_salaries("SP")
 
-SP_salaries
+head(SP_salaries)
 ```
 
+## Contributing
+
+Please visit this package's [Github repo](https://github.com/dfo-mar-odis/TBSpayRates) to contribute or submit issues.
 
 ## Code of Conduct
 
