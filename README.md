@@ -54,3 +54,10 @@ SP_salaries
 #> #   Step.9 <dbl>, Step.10 <dbl>, Step.11 <dbl>, Step.12 <dbl>, Step.13 <dbl>,
 #> #   Step.14 <dbl>, Range.Step.1 <chr>
 ```
+
+## Code of Conduct
+
+Please note that the TBSpayRates project is released with a [Contributor
+Code of
+Conduct](https://dfo-mar-odis.github.io/TBSpayRates/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
