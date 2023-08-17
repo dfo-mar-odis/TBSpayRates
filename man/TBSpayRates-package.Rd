@@ -8,4 +8,11 @@
 \description{
 A package to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://dfo-mar-odis.github.io/TBSpayRates/}
+}
+
+}
 \keyword{internal}
