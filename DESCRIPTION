@@ -1,0 +1,18 @@
+Package: TBSpayRates
+Type: Package
+Title: Rates of pay for the public service from the Treasury Board of Canada Secretariat
+Version: 0.1.0
+Author: Remi Daigle
+Maintainer: Remi Daigle <Remi.Daigle@dfo-mpo.gc.ca>
+Description: A package to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    dplyr,
+    magrittr,
+    rlang,
+    rvest,
+    tidyr
