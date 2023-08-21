@@ -32,15 +32,26 @@ remotes::install_github("dfo-mar-odis/TBSpayRates")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to download salaries for the `SP` group. Alternatively, to extract all the groups supported by this package, use `groups = "all"` in the `get_salaries()` function.
 
 ```{r example}
 library(TBSpayRates)
 
-SP_salaries <- get_salaries("SP")
-
-head(SP_salaries)
+SP_salaries <- get_salaries(groups = "SP")
 ```
+```{r,eval=FALSE}
+head(salaries)
+```
+```{r,echo=FALSE}
+knitr::kable(head(SP_salaries))
+```
+
+If desired, users can write the extracted data to a `.csv` for use outside of R:
+
+```{r}
+write.csv(SP_salaries,"SP_salaries.csv",row.names = FALSE)
+```
+
 
 ## Contributing
 
