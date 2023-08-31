@@ -246,8 +246,45 @@
 </tr>
 </tbody>
 </table>
-<p>If desired, users can write the extracted data to a <code>.csv</code> for use outside of R:</p>
+<p>The compatible groups/classifications are store in the <code>groups</code> data object:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Group</th>
+<th align="left">Classification</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">AI</td>
+<td align="left">AI-01</td>
+</tr>
+<tr class="even">
+<td align="left">AI</td>
+<td align="left">AI-02</td>
+</tr>
+<tr class="odd">
+<td align="left">AI</td>
+<td align="left">AI-03</td>
+</tr>
+<tr class="even">
+<td align="left">AI</td>
+<td align="left">AI-04</td>
+</tr>
+<tr class="odd">
+<td align="left">AI</td>
+<td align="left">AI-05</td>
+</tr>
+<tr class="even">
+<td align="left">AI</td>
+<td align="left">AI-06</td>
+</tr>
+</tbody>
+</table>
+<p>If desired, users can write the extracted data to a <code>.csv</code> for use outside of R:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">SP_salaries</span>,<span class="st">"SP_salaries.csv"</span>,row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
