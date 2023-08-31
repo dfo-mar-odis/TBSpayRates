@@ -48,6 +48,26 @@ head(salaries)
 | SP    | AC-1           | B\) October 1, 2019                   | 2019-10-01 |  72398 |  75443 |  78494 |  81537 |  84580 |  88214 |  91830 |  95249 |  98523 |  101813 |  105632 |  109594 |  113556 |  118179 | NA           |
 | SP    | AC-1           | C\) October 1, 2020                   | 2020-10-01 |  73484 |  76575 |  79671 |  82760 |  85849 |  89537 |  93207 |  96678 | 100001 |  103340 |  107216 |  111238 |  115259 |  119952 | NA           |
 
+The compatible groups/classifications are store in the `groups` data
+object:
+
+``` r
+data(groups)
+```
+
+``` r
+head(groups)
+```
+
+| Group | Classification |
+|:------|:---------------|
+| AI    | AI-01          |
+| AI    | AI-02          |
+| AI    | AI-03          |
+| AI    | AI-04          |
+| AI    | AI-05          |
+| AI    | AI-06          |
+
 If desired, users can write the extracted data to a `.csv` for use
 outside of R:
 

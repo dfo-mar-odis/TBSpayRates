@@ -46,6 +46,18 @@ head(salaries)
 knitr::kable(head(SP_salaries))
 ```
 
+The compatible groups/classifications are store in the `groups` data object:
+
+```{r data}
+data(groups)
+```
+```{r,eval=FALSE}
+head(groups)
+```
+```{r,echo=FALSE}
+knitr::kable(head(groups))
+```
+
 If desired, users can write the extracted data to a `.csv` for use outside of R:
 
 ```{r}
