@@ -77,8 +77,8 @@ get_salaries <- function(groups="all"){
                       gsub('<caption class=\"text-left\">\r\n            ',"",.)  %>%
                       gsub("<.*?>","",.)  %>%
                       iconv(., "UTF-8", "ASCII", "Unicode") %>%
-                      gsub('<U+00A0>',"",.) %>%
-                      gsub('<.*?>',"",.) %>%
+                      gsub('<U+00A0>'," ",.) %>%
+                      gsub('<.*?>',"-",.) %>%
                       gsub('table .',"",.) %>%
                       gsub('note .',"",.) %>%
                       gsub(' . Annual.*',"",.,ignore.case=TRUE) %>%
