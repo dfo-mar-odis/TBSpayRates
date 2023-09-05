@@ -82,13 +82,10 @@ get_salaries <- function(groups="all"){
                       gsub('table .',"",.) %>%
                       gsub('note .',"",.) %>%
                       gsub(' . Annual.*',"",.,ignore.case=TRUE) %>%
-                      gsub(' annual.*',"",.) %>%
+                      gsub(' annual.*',"",.,ignore.case=TRUE) %>%
                       gsub(' Step.*',"",.) %>%
                       gsub(':.*',"",.) %>%
                       gsub('\\\r.*',"",.) %>%
-                      gsub('<strong>',"",.) %>%
-                      gsub('</strong>',"",.) %>%
-                      trimws("left")) %>%
                       gsub('-$',"",.) %>%
                       gsub('[-]([1-9])', "-0\\1",.) %>%
                       trimws("both")) %>%
