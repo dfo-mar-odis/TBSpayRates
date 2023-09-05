@@ -76,15 +76,22 @@ get_salaries <- function(groups="all"){
                       gsub('<caption class="text-left">\r\n',"",.) %>%
                       gsub('<caption class=\"text-left\">\r\n            ',"",.)  %>%
                       gsub("<.*?>","",.)  %>%
+                      iconv(., "UTF-8", "ASCII", "Unicode") %>%
+                      gsub('<U+00A0>',"",.) %>%
+                      gsub('<.*?>',"",.) %>%
                       gsub('table .',"",.) %>%
                       gsub('note .',"",.) %>%
                       gsub(' . Annual.*',"",.,ignore.case=TRUE) %>%
                       gsub(' annual.*',"",.) %>%
+                      gsub(' Step.*',"",.) %>%
                       gsub(':.*',"",.) %>%
                       gsub('\\\r.*',"",.) %>%
                       gsub('<strong>',"",.) %>%
                       gsub('</strong>',"",.) %>%
                       trimws("left")) %>%
+                      gsub('-$',"",.) %>%
+                      gsub('[-]([1-9])', "-0\\1",.) %>%
+                      trimws("both")) %>%
              unlist()
     )
 
