@@ -1,4 +1,3 @@
-
 #' get_salaries
 #'
 #' @param groups character vector with the groups listed here: https://www.tbs-sct.canada.ca/pubs_pol/hrpubs/coll_agre/rates-taux-eng.asp Note that this function only supports select groups. Use "all" (default) to download all supported groups
@@ -65,6 +64,15 @@ get_salaries <- function(groups="all"){
 
   correcttables <- lapply(tables, function(x) x[grepl("Effective Date",rvest::html_text2(x),ignore.case = TRUE)&
                                                   grepl("annual",rvest::html_text2(x),ignore.case = TRUE)])
+
+
+  if (length(correcttables[[1]]) == 0) {
+    # This means no tables with "Effective Date" AND "annual" are found (e.g. group="CX")
+
+    correcttables <- lapply(tables, function(x) x[grepl("Effective Date",rvest::html_text2(x),ignore.case = TRUE)])
+
+
+  }
 
   salarytables <- lapply(correcttables,
                          rvest::html_table)
