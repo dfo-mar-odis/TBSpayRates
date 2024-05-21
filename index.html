@@ -8,10 +8,10 @@
 <meta name="description" content="A package to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.">
 <title>Rates of pay for the public service from the Treasury Board of Canada Secretariat • TBSpayRates</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Rates of pay for the public service from the Treasury Board of Canada Secretariat">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Rates of pay for the public service from the Treasury Board of Canada Secretariat">
 <meta property="og:description" content="A package to extract rates of pay for public servants from the Treasury Board of Canada Secretariat and tools for project planning/salary forecasting.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -22,7 +22,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">TBSpayRates</a>
 
@@ -71,14 +71,20 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dfo-mar-odis.github.io/TBSpayRates/">TBSpayRates</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">SP_salaries</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_salaries.html">get_salaries</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">"SP"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">SP_salaries</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_salaries.html">get_salaries</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">"SP"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: There were 5 warnings in `dplyr::mutate()`.</span></span>
+<span><span class="co">#&gt; The first warning was:</span></span>
+<span><span class="co">#&gt; i In argument: `dplyr::across(...)`.</span></span>
+<span><span class="co">#&gt; Caused by warning:</span></span>
+<span><span class="co">#&gt; ! NAs introduced by coercion</span></span>
+<span><span class="co">#&gt; i Run `dplyr::last_dplyr_warnings()` to see the 4 remaining warnings.</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">salaries</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="3%">
 <col width="7%">
-<col width="19%">
+<col width="18%">
 <col width="5%">
 <col width="3%">
 <col width="3%">
@@ -89,11 +95,13 @@
 <col width="3%">
 <col width="3%">
 <col width="3%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
 <col width="6%">
 </colgroup>
 <thead><tr class="header">
@@ -115,133 +123,147 @@
 <th align="right">Step.12</th>
 <th align="right">Step.13</th>
 <th align="right">Step.14</th>
+<th align="right">Step.15</th>
+<th align="right">Step.16</th>
 <th align="left">Range.Step.1</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">SP</td>
-<td align="left">AC-1</td>
-<td align="left">$) October 1, 2017</td>
-<td align="left">2017-10-01</td>
-<td align="right">68896</td>
-<td align="right">71795</td>
-<td align="right">74697</td>
-<td align="right">77593</td>
-<td align="right">80489</td>
-<td align="right">83947</td>
-<td align="right">87388</td>
-<td align="right">90643</td>
-<td align="right">93758</td>
-<td align="right">96890</td>
-<td align="right">100523</td>
-<td align="right">104294</td>
-<td align="right">108063</td>
-<td align="right">112464</td>
+<td align="left">AC-01</td>
+<td align="left">$) October 1, 2021</td>
+<td align="left">2021-10-01</td>
+<td align="right">74586</td>
+<td align="right">77724</td>
+<td align="right">80866</td>
+<td align="right">84001</td>
+<td align="right">87137</td>
+<td align="right">90880</td>
+<td align="right">94605</td>
+<td align="right">98128</td>
+<td align="right">101501</td>
+<td align="right">104890</td>
+<td align="right">108824</td>
+<td align="right">112907</td>
+<td align="right">116988</td>
+<td align="right">121751</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">SP</td>
-<td align="left">AC-1</td>
-<td align="left">X) Wage Adjustment - October 1, 2018</td>
-<td align="left">2018-10-01</td>
-<td align="right">69447</td>
-<td align="right">72369</td>
-<td align="right">75295</td>
-<td align="right">78214</td>
-<td align="right">81133</td>
-<td align="right">84619</td>
-<td align="right">88087</td>
-<td align="right">91368</td>
-<td align="right">94508</td>
-<td align="right">97665</td>
-<td align="right">101327</td>
-<td align="right">105128</td>
-<td align="right">108928</td>
-<td align="right">113364</td>
+<td align="left">AC-01</td>
+<td align="left">A) October 1, 2022</td>
+<td align="left">2022-10-01</td>
+<td align="right">77197</td>
+<td align="right">80444</td>
+<td align="right">83696</td>
+<td align="right">86941</td>
+<td align="right">90187</td>
+<td align="right">94061</td>
+<td align="right">97916</td>
+<td align="right">101562</td>
+<td align="right">105054</td>
+<td align="right">108561</td>
+<td align="right">112633</td>
+<td align="right">116859</td>
+<td align="right">121083</td>
+<td align="right">126012</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">SP</td>
-<td align="left">AC-1</td>
-<td align="left">A) October 1, 2018</td>
-<td align="left">2018-10-01</td>
-<td align="right">70836</td>
-<td align="right">73816</td>
-<td align="right">76801</td>
-<td align="right">79778</td>
-<td align="right">82756</td>
-<td align="right">86311</td>
-<td align="right">89849</td>
-<td align="right">93195</td>
-<td align="right">96398</td>
-<td align="right">99618</td>
-<td align="right">103354</td>
-<td align="right">107231</td>
-<td align="right">111107</td>
-<td align="right">115631</td>
+<td align="left">AC-01</td>
+<td align="left">W) October 1, 2022 – Wage adjustment</td>
+<td align="left">2022-10-01</td>
+<td align="right">78162</td>
+<td align="right">81450</td>
+<td align="right">84742</td>
+<td align="right">88028</td>
+<td align="right">91314</td>
+<td align="right">95237</td>
+<td align="right">99140</td>
+<td align="right">102832</td>
+<td align="right">106367</td>
+<td align="right">109918</td>
+<td align="right">114041</td>
+<td align="right">118320</td>
+<td align="right">122597</td>
+<td align="right">127587</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">SP</td>
-<td align="left">AC-1</td>
-<td align="left">Y) Wage Adjustment - October 1, 2019</td>
-<td align="left">2019-10-01</td>
-<td align="right">70978</td>
-<td align="right">73964</td>
-<td align="right">76955</td>
-<td align="right">79938</td>
-<td align="right">82922</td>
-<td align="right">86484</td>
-<td align="right">90029</td>
-<td align="right">93381</td>
-<td align="right">96591</td>
-<td align="right">99817</td>
-<td align="right">103561</td>
-<td align="right">107445</td>
-<td align="right">111329</td>
-<td align="right">115862</td>
+<td align="left">AC-01</td>
+<td align="left">B) October 1, 2023</td>
+<td align="left">2023-10-01</td>
+<td align="right">80507</td>
+<td align="right">83894</td>
+<td align="right">87284</td>
+<td align="right">90669</td>
+<td align="right">94053</td>
+<td align="right">98094</td>
+<td align="right">102114</td>
+<td align="right">105917</td>
+<td align="right">109558</td>
+<td align="right">113216</td>
+<td align="right">117462</td>
+<td align="right">121870</td>
+<td align="right">126275</td>
+<td align="right">131415</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">SP</td>
-<td align="left">AC-1</td>
-<td align="left">B) October 1, 2019</td>
-<td align="left">2019-10-01</td>
-<td align="right">72398</td>
-<td align="right">75443</td>
-<td align="right">78494</td>
-<td align="right">81537</td>
-<td align="right">84580</td>
-<td align="right">88214</td>
-<td align="right">91830</td>
-<td align="right">95249</td>
-<td align="right">98523</td>
-<td align="right">101813</td>
-<td align="right">105632</td>
-<td align="right">109594</td>
-<td align="right">113556</td>
-<td align="right">118179</td>
+<td align="left">AC-01</td>
+<td align="left">X) October 1, 2023 – Pay line adjustment</td>
+<td align="left">2023-10-01</td>
+<td align="right">80910</td>
+<td align="right">84313</td>
+<td align="right">87720</td>
+<td align="right">91122</td>
+<td align="right">94523</td>
+<td align="right">98584</td>
+<td align="right">102625</td>
+<td align="right">106447</td>
+<td align="right">110106</td>
+<td align="right">113782</td>
+<td align="right">118049</td>
+<td align="right">122479</td>
+<td align="right">126906</td>
+<td align="right">132072</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">SP</td>
-<td align="left">AC-1</td>
-<td align="left">C) October 1, 2020</td>
-<td align="left">2020-10-01</td>
-<td align="right">73484</td>
-<td align="right">76575</td>
-<td align="right">79671</td>
-<td align="right">82760</td>
-<td align="right">85849</td>
-<td align="right">89537</td>
-<td align="right">93207</td>
-<td align="right">96678</td>
-<td align="right">100001</td>
-<td align="right">103340</td>
-<td align="right">107216</td>
-<td align="right">111238</td>
-<td align="right">115259</td>
-<td align="right">119952</td>
+<td align="left">AC-01</td>
+<td align="left">Y) 180 days of signing – restructure</td>
+<td align="left">NA</td>
+<td align="right">84313</td>
+<td align="right">87720</td>
+<td align="right">91122</td>
+<td align="right">94523</td>
+<td align="right">98584</td>
+<td align="right">102625</td>
+<td align="right">106447</td>
+<td align="right">110106</td>
+<td align="right">113782</td>
+<td align="right">118049</td>
+<td align="right">122479</td>
+<td align="right">126906</td>
+<td align="right">132072</td>
+<td align="right">137144</td>
+<td align="right">142410</td>
+<td align="right">147878</td>
 <td align="left">NA</td>
 </tr>
 </tbody>
@@ -339,13 +361,11 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Remi Daigle.</p>
+  <p>Developed by Remi Daigle.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>
