@@ -13,7 +13,13 @@ get_salaries(groups = "all")
 dataframe with public service pay rates
 }
 \description{
-get_salaries
+This function gets the publicly available DFO salary information from
+https://www.tbs-sct.canada.ca/pubs_pol/hrpubs/coll_agre/rates-taux-eng.asp.
+}
+\details{
+Disclaimer: If you're obtaining salary information for group="TC", subgroup=TI
+this function obtains the first classification tables and ignores ones that are
+specific to Aviation, Marine, and Railway Safety.
 }
 \examples{
 # getting salaries for the SP (Applied Science and Patent Examination) group

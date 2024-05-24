@@ -1,5 +1,12 @@
 #' get_salaries
 #'
+#' This function gets the publicly available DFO salary information from
+#' https://www.tbs-sct.canada.ca/pubs_pol/hrpubs/coll_agre/rates-taux-eng.asp.
+#'
+#' Disclaimer: If you're obtaining salary information for group="TC", subgroup=TI
+#' this function obtains the first classification tables and ignores ones that are
+#' specific to Aviation, Marine, and Railway Safety.
+#'
 #' @param groups character vector with the groups listed here: https://www.tbs-sct.canada.ca/pubs_pol/hrpubs/coll_agre/rates-taux-eng.asp Note that this function only supports select groups. Use "all" (default) to download all supported groups
 #'
 #' @return dataframe with public service pay rates
@@ -30,7 +37,7 @@ get_salaries <- function(groups="all"){
                LP=paste0(base_url,"13"),
                NR=paste0(base_url,"16"),
                PA=paste0(base_url,"15"),
-               PR=paste0(base_url,"14"),
+               #PR=paste0(base_url,"14"), hourly rate. Can do if needed.
                RE=paste0(base_url,"18"),
                RO=paste0(base_url,"17"),
                # SH=paste0(base_url,"19"), # subgroups, TBD later
@@ -47,9 +54,11 @@ get_salaries <- function(groups="all"){
   # get web pages for selected groups
   if(all(groups=="all")){
     pages <- lapply(urls,rvest::read_html)
+    response <- lapply(urls, httr::GET)
   } else {
     if(all(groups %in% names(urls))){
       pages <- lapply(urls[groups],rvest::read_html)
+      response <- lapply(urls[groups], httr::GET)
     } else {
       stop(paste(groups[!(groups %in% names(urls))],
                  "is not a valid group. Restrict choices to:",
@@ -59,19 +68,79 @@ get_salaries <- function(groups="all"){
 
   }
 
-  # extract salary tables
+
+  # TEST if there are any "Toronto" tables (e.g. group = "PL")
+  # Test if any "Engineering and Scientific Support Group" group = TC EG-2
+  # For subgroup = TI, there are classifications Aviation, Railway Safety, and Marine. We will only be focusing on Marine for our purposes
+  content <- lapply(response, function(x) httr::content(x, as="text"))
+  lines <- lapply(content, function(x) strsplit(x, "\n")[[1]])
+  tableLines <- lapply(lines, function(x) grep("<table", x))
+
   tables <- lapply(pages,rvest::html_elements,"table")
 
-  correcttables <- lapply(tables, function(x) x[grepl("Effective Date",rvest::html_text2(x),ignore.case = TRUE)&
-                                                  grepl("annual",rvest::html_text2(x),ignore.case = TRUE)])
+  toronto <- FALSE
+  supportGroup <- FALSE
+  technicalInspection <- FALSE
+  CSHour <- FALSE
+
+  #browser()
+
+  for (l in seq_along(lines)) {
+    line <- lines[[l]]
+    if (any(line == "            <h4>II: Toronto (BUD 21401)</h4>\r")) {
+      toronto <- TRUE
+      # group = PL
+      bad <- which(line == "            <h4>II: Toronto (BUD 21401)</h4>\r")
+      tableLines[[l]] <- tableLines[[l]][-which(tableLines[[l]] > bad)]
+    }
+
+    if (any(line == "                <h3 id=\"MainContent_CAContentControl_CAContentRepeater_ArticleRepeater_7_H3Element_2\">EG: Engineering and Scientific Support Group annual rates of pay for salary protected employees (in\r")){ # TC
+      supportGroup <- TRUE
+      bad <- which(line == "                <h3 id=\"MainContent_CAContentControl_CAContentRepeater_ArticleRepeater_7_H3Element_2\">EG: Engineering and Scientific Support Group annual rates of pay for salary protected employees (in\r")
+      tableLines[[l]] <- tableLines[[l]][-(which(tableLines[[l]] == tableLines[[l]][which(tableLines[[l]] > bad)[1]]))]
+      tables[[l]] <- tables[[l]][-(which(tableLines[[l]] == tableLines[[l]][which(tableLines[[l]] > bad)[1]]))]
+    }
+
+    if (any(line == "                <h3 id=\"MainContent_CAContentControl_CAContentRepeater_ArticleRepeater_8_H3Element_0\">TI: Technical Inspection Group annual rates of pay: aviation, marine, railway safety (in dollars)</h3>\r")) { # TC
+      technicalInspection <- TRUE
+      bad <- which(line == "                <h3 id=\"MainContent_CAContentControl_CAContentRepeater_ArticleRepeater_8_H3Element_0\">TI: Technical Inspection Group annual rates of pay: aviation, marine, railway safety (in dollars)</h3>\r")
+      tableLines[[l]] <- tableLines[[l]][-which(tableLines[[l]] > bad)]
+      warning("You are obtaining TI salary information from group='TC'. Please see get_salaries() documentation for disclaimer")
+    }
+
+    if (any(line == "                <h3 id=\"MainContent_CAContentControl_CAContentRepeater_ArticleRepeater_6_H3Element_0\">CS: Computer Systems Group weekly, daily and hourly rates of pay</h3>\r")) {
+      CSHour <- TRUE
+      bad <- which(line == "                <h3 id=\"MainContent_CAContentControl_CAContentRepeater_ArticleRepeater_6_H3Element_0\">CS: Computer Systems Group weekly, daily and hourly rates of pay</h3>\r")
+      tableLines[[l]] <- tableLines[[l]][-which(tableLines[[l]] > bad)]
+    }
+
+  }
+
+  # extract salary tables
+  if (toronto | technicalInspection | CSHour) {
+    for (i in seq_along(tables)) {
+      tables[[i]] <- tables[[i]][1:length(tableLines[[i]])]
+    }
+  }
+
+  correcttables <- NULL
+  for (g in seq_along(groups)) {
+    tab <- tables[[g]]
+    k <- which(grepl("Effective Date", html_text2(tab), ignore.case=TRUE))
+    k1 <- which(grepl("step", html_text2(tab), ignore.case=TRUE))
+    k2 <- which(grepl("range", html_text2(tab), ignore.case=TRUE))
+    k3 <- unique(c(k1,k2))
+    keep <- sort(unique(intersect(k,k3)))
+    correcttables[[g]] <- tab[keep]
+  }
+  names(correcttables) <- groups
+
+
 
 
   if (length(correcttables[[1]]) == 0) {
     # This means no tables with "Effective Date" AND "annual" are found (e.g. group="CX")
-
     correcttables <- lapply(tables, function(x) x[grepl("Effective Date",rvest::html_text2(x),ignore.case = TRUE)])
-
-
   }
 
   salarytables <- lapply(correcttables,
@@ -85,13 +154,14 @@ get_salaries <- function(groups="all"){
                       gsub('<caption class=\"text-left\">\r\n            ',"",.)  %>%
                       gsub("<.*?>","",.)  %>%
                       iconv(., "UTF-8", "ASCII", "Unicode") %>%
-                      gsub('<U+00A0>'," ",.) %>%
-                      gsub('<.*?>',"-",.) %>%
-                      gsub('table .',"",.) %>%
-                      gsub('note .',"",.) %>%
+                      gsub('<U+00A0>'," ",., ignore.case = TRUE) %>%
+                      gsub('<.*?>',"-",., ignore.case=TRUE) %>%
+                      gsub('table .',"",., ignore.case=TRUE) %>%
+                      gsub('note .',"",., ignore.case=TRUE) %>%
                       gsub(' . Annual.*',"",.,ignore.case=TRUE) %>%
                       gsub(' annual.*',"",.,ignore.case=TRUE) %>%
-                      gsub(' Step.*',"",.) %>%
+                      gsub(' Step.*',"",., ignore.case=TRUE) %>%
+                      sub("\\(Steps.*", "", .) %>%
                       gsub(':.*',"",.) %>%
                       gsub('\\\r.*',"",.) %>%
                       gsub('-$',"",.) %>%
@@ -104,6 +174,23 @@ get_salaries <- function(groups="all"){
     names(salarytables[[i]]) <- classifications[[i]]
   }
 
+  # Check for "Table" at the end of each data frames
+  # Remove table in effective date ("A) May 10, 2018table 1 note 1" group ="LP")
+  for (j in seq_along(groups)) {
+    for (i in seq_along(salarytables[[j]])) {
+    salarytables[[j]][[i]] <- dplyr::rename(salarytables[[j]][[i]], dplyr::any_of(
+        c(`Effective Date`="Effective date")
+      ))
+    s <- salarytables[[j]][[i]]
+
+    salarytables[[j]][[i]]$`Effective Date`[which(grepl("-", salarytables[[j]][[i]]$`Effective Date`))] <- gsub("\\s*-\\s*", "-", salarytables[[j]][[i]]$`Effective Date`[which(grepl("-", salarytables[[j]][[i]]$`Effective Date`))]) # This is for group = TC (June 22, 2023 - Pay and June 22,2023-Pay)
+    if (grepl("table", s$`Effective Date`[length(s$`Effective Date`)], ignore.case = TRUE)) {
+      s$`Effective Date` <- unlist(lapply(strsplit(s$`Effective Date`, "table"), function(x) x[1]))
+      salarytables[[j]][[i]] <- s[1:(length(s$`Effective Date`)-1),]
+    }
+    }
+  }
+
   # clean up and bind all tables
   megadf <- lapply(salarytables %>%
                      lapply(function(y) lapply(y, function(x) x %>%
@@ -113,20 +200,20 @@ get_salaries <- function(groups="all"){
                                                  )) %>%
                                                  dplyr::rename_with(make.names)
                      )),
-                   dplyr::bind_rows,.id = "Classification") %>%
+                   dplyr::bind_rows,.id = "Classification")%>%
     dplyr::bind_rows(.id="Group") %>%
-    tidyr::pivot_longer(!c(.data$Group,.data$Classification,.data$Effective.Date),
+    tidyr::pivot_longer(!c(Group,Classification,Effective.Date),
                         names_to = "step",
                         values_to = "salary",
-                        values_drop_na = TRUE) %>%
-    dplyr::filter(!grepl("table",.data$salary,ignore.case=TRUE)) %>%
-    dplyr::filter(!grepl("pay",.data$salary,ignore.case=TRUE)) %>%
-    dplyr::mutate(step=dplyr::if_else(grepl("Range\\.",.data$step,),"Range.Step.1",.data$step),
-                  Effective.Date=gsub("table .*","",.data$Effective.Date)) %>%
-    tidyr::pivot_wider(names_from = .data$step,
-                       values_from = .data$salary) %>%
-    dplyr::relocate(dplyr::starts_with("Range"),.after=dplyr::starts_with("Step")) %>%
-    dplyr::mutate(date=.data$Effective.Date %>%
+                        values_drop_na = TRUE)%>%
+    dplyr::filter(!grepl("table",salary,ignore.case=TRUE)) %>%
+    dplyr::filter(!grepl("pay",salary,ignore.case=TRUE)) %>%
+    dplyr::mutate(step=dplyr::if_else(grepl("Range\\.",step,),"Range.Step.1",step),
+                  Effective.Date=gsub("table .*","",Effective.Date)) %>%
+    tidyr::pivot_wider(names_from = step,
+                       values_from = salary)%>%
+    dplyr::relocate(dplyr::starts_with("Range"),.after=dplyr::starts_with("Step"))%>%
+    dplyr::mutate(date=Effective.Date %>%
                     gsub("Wage Adjustment","",.,ignore.case=TRUE) %>%
                     gsub("Market Adjustment","",.,ignore.case=TRUE) %>%
                     gsub("Pay Line Adjustment","",.,ignore.case=TRUE) %>%
@@ -138,7 +225,7 @@ get_salaries <- function(groups="all"){
                     trimws() %>%
                     as.Date("%B %d %Y")
     ) %>%
-    dplyr::relocate(date,.after="Effective.Date") %>%
+    dplyr::relocate(date,.after="Effective.Date")%>%
     dplyr::mutate(dplyr::across(dplyr::starts_with("step"),function(x) as.numeric(gsub(",","",x)))) #%>%
     #tidyr::separate_wider_delim(Range)
 
