@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-05-27T11:16Z
+last_built: 2024-05-27T14:08Z
 urls:
   reference: https://dfo-mar-odis.github.io/TBSpayRates/reference
   article: https://dfo-mar-odis.github.io/TBSpayRates/articles
