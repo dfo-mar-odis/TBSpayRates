@@ -83,8 +83,6 @@ get_salaries <- function(groups="all"){
   technicalInspection <- FALSE
   CSHour <- FALSE
 
-  #browser()
-
   for (l in seq_along(lines)) {
     line <- lines[[l]]
     if (any(line == "            <h4>II: Toronto (BUD 21401)</h4>\r")) {
@@ -146,6 +144,7 @@ get_salaries <- function(groups="all"){
   salarytables <- lapply(correcttables,
                          rvest::html_table)
 
+
   # Clean up classifications
   classifications <- correcttables %>%
     lapply(function(y) y %>%
@@ -174,8 +173,12 @@ get_salaries <- function(groups="all"){
     names(salarytables[[i]]) <- classifications[[i]]
   }
 
+
+
   # Check for "Table" at the end of each data frames
   # Remove table in effective date ("A) May 10, 2018table 1 note 1" group ="LP")
+  # Check for intermediate steps of $60 at beginning (group="NR" subgroup=EN-ENG)
+
   for (j in seq_along(groups)) {
     for (i in seq_along(salarytables[[j]])) {
     salarytables[[j]][[i]] <- dplyr::rename(salarytables[[j]][[i]], dplyr::any_of(
@@ -188,8 +191,16 @@ get_salaries <- function(groups="all"){
       s$`Effective Date` <- unlist(lapply(strsplit(s$`Effective Date`, "table"), function(x) x[1]))
       salarytables[[j]][[i]] <- s[1:(length(s$`Effective Date`)-1),]
     }
+
+    #monday jaim
+
+    if (any(grepl("intermediate steps of", s$`Effective Date`, ignore.case=TRUE))) {
+      #browser()
+      salarytables[[j]][[i]] <- salarytables[[j]][[i]][-1,]
+    }
     }
   }
+
 
   # clean up and bind all tables
   megadf <- lapply(salarytables %>%
