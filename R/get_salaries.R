@@ -194,8 +194,7 @@ get_salaries <- function(groups="all"){
 
     #monday jaim
 
-    if (any(grepl("intermediate steps of", s$`Effective Date`, ignore.case=TRUE))) {
-      #browser()
+    if (any(grepl("intermediate steps of \\$60", s$`Effective Date`, ignore.case=TRUE))) {
       salarytables[[j]][[i]] <- salarytables[[j]][[i]][-1,]
     }
     }
