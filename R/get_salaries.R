@@ -46,7 +46,7 @@ get_salaries <- function(groups="all"){
                # `SR-C`=paste0(base_url,"21"),
                # # `SR-E`=paste0(base_url,"22"), #formatting is too wild!
                # # `SR-W`=paste0(base_url,"23"), #formatting is too wild!
-               # SV=paste0(base_url,"24"), # subgroups, TBD later
+               SV=paste0(base_url,"24"), # subgroups, TBD later
                TC=paste0(base_url,"25"),
                TR=paste0(base_url,"26"),
                UT=paste0(base_url,"27"))
@@ -82,6 +82,8 @@ get_salaries <- function(groups="all"){
   supportGroup <- FALSE
   technicalInspection <- FALSE
   CSHour <- FALSE
+  ELA <- FALSE
+  # HERE ADD if there is a group = "EL" remove the tables after Apprendix B-3
 
   for (l in seq_along(lines)) {
     line <- lines[[l]]
@@ -112,10 +114,24 @@ get_salaries <- function(groups="all"){
       tableLines[[l]] <- tableLines[[l]][-which(tableLines[[l]] > bad)]
     }
 
+    if (groups[[l]] == "EL") {
+      k1 <- which(grepl("Appendix", line))
+      k2 <- which(grepl("B-2", line))
+      k3 <- intersect(k1,k2)
+      k33 <- which(grepl("<h2>", line))
+      keepel <- intersect(k3,k33)
+
+    if (!(length(keepel)== 0)) {
+      ELA <- TRUE
+      bad <- keepel
+      tableLines[[l]] <- tableLines[[l]][-which(tableLines[[l]] > bad)]
+    }
+    }
+
   }
 
   # extract salary tables
-  if (toronto | technicalInspection | CSHour) {
+  if (toronto | technicalInspection | CSHour | ELA) {
     for (i in seq_along(tables)) {
       tables[[i]] <- tables[[i]][1:length(tableLines[[i]])]
     }
@@ -144,6 +160,8 @@ get_salaries <- function(groups="all"){
   salarytables <- lapply(correcttables,
                          rvest::html_table)
 
+  #browser()
+
 
   # Clean up classifications
   classifications <- correcttables %>%
@@ -169,6 +187,31 @@ get_salaries <- function(groups="all"){
              unlist()
     )
 
+
+  # TEST
+  #https://github.com/dfo-mar-odis/TBSpayRates/issues/2
+  if (any(groups == "SV")) {
+    gk <- which(groups == "SV")
+    if (any(classifications[[gk]] == "C) Effective August-05,-02023 - Increase to Rates of Pay")) {
+      salarytables[[gk]] <- salarytables[[gk]][-which(classifications[[gk]] == "C) Effective August-05,-02023 - Increase to Rates of Pay")]
+      classifications[[gk]] <- classifications[[gk]][-which(classifications[[gk]] == "C) Effective August-05,-02023 - Increase to Rates of Pay")]
+
+    }
+
+    if (any(grepl("Level", classifications[[gk]], ignore.case=TRUE))) {
+      salarytables[[gk]] <- salarytables[[gk]][-(which(grepl("Level", classifications[[gk]], ignore.case=TRUE)))]
+      classifications[[gk]] <- classifications[[gk]][-(which(grepl("Level", classifications[[gk]], ignore.case=TRUE)))]
+
+    }
+
+    if (any(grepl("(DND only)", classifications[[gk]], ignore.case=TRUE))) {
+      salarytables[[gk]] <- salarytables[[gk]][-(which(grepl("(DND only)", classifications[[gk]], ignore.case=TRUE)))]
+      classifications[[gk]] <- classifications[[gk]][-(which(grepl("(DND only)", classifications[[gk]], ignore.case=TRUE)))]
+    }
+
+  }
+  # END TEST
+
   for(i in 1:length(classifications)){
     names(salarytables[[i]]) <- classifications[[i]]
   }
@@ -192,14 +235,12 @@ get_salaries <- function(groups="all"){
       salarytables[[j]][[i]] <- s[1:(length(s$`Effective Date`)-1),]
     }
 
-    #monday jaim
-
     if (any(grepl("intermediate steps of \\$60", s$`Effective Date`, ignore.case=TRUE))) {
       salarytables[[j]][[i]] <- salarytables[[j]][[i]][-1,]
     }
     }
   }
-
+#browser()
 
   # clean up and bind all tables
   megadf <- lapply(salarytables %>%
@@ -236,7 +277,5 @@ get_salaries <- function(groups="all"){
                     as.Date("%B %d %Y")
     ) %>%
     dplyr::relocate(date,.after="Effective.Date")%>%
-    dplyr::mutate(dplyr::across(dplyr::starts_with("step"),function(x) as.numeric(gsub(",","",x)))) #%>%
-    #tidyr::separate_wider_delim(Range)
-
+    dplyr::mutate(dplyr::across(dplyr::starts_with("step"),function(x) as.numeric(gsub(",","",x))))
 }
